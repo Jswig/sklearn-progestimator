@@ -1,3 +1,7 @@
+# Anders Poirel
+
+# Efficient implementation of shift by 
+# gzc: https://stackoverflow.com/a/42642326
 
 import numpy as np
 
