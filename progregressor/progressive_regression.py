@@ -8,15 +8,23 @@ from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 class ProgressiveRegressor(BaseEstimator, RegressorMixin):
     
     def __init__(self, base_model = LinearRegression()):
-
         self.model = base_model
         self.last_target = None
     
     @staticmethod
     def _shift(arr, num, fill_value = np.nan):
-        """
-        Helper method for shifting numpy array
-        without looping back
+        """ Shifts a numpy 1D array without looping around
+        
+        Parameters
+        ----------
+        arr : {ndrarray} of shape (n, 1)
+        num : shift amount
+        fill_value: {np.float} value to insert into the beginning
+        of the array after shifting
+
+        Returns
+        -------
+        {ndarray} of shape (n,1) with values shifter by num
         """
         result = np.empty_like(arr)
         if num > 0:
@@ -30,7 +38,19 @@ class ProgressiveRegressor(BaseEstimator, RegressorMixin):
         return result
     
     def fit(self, X, y):
+        """Fit progressive regression model.
 
+        Parameters
+        ----------
+        X : {ndarray, sparse matrix} of shape (n_samples, n_features)
+            Training data
+        y : ndarray of shape (n_samples,) or (n_samples, n_targets)
+            Target values
+
+        Returns
+        -------
+        self : returns an instance of self.
+        """
         assert is_regressor(self.model)
         y_lag1 = self._shift(y, 1)
         y_lag1[0] = y[0]
