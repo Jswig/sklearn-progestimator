@@ -76,6 +76,6 @@ class ProgressiveRegressor(BaseEstimator, RegressorMixin):
         for i in range(len(X)-1):
             y_pred[i] = self.model.predict(X_new[i,:])
             X_new[i+1:-1] = y_pred[i]
-        y_pred[-1] = self.model.predic(X_new[-1,:]) 
+        y_pred[-1] = self.model.predict(X_new[-1,:]) 
         
         return y_pred
