@@ -21,13 +21,10 @@ WIP
 ## Development
 
 ### Environment
-
-Create the development environment
+ 
+Create the development environment and activate it
 ```bash
 conda env create -f environment.yml
-```
-Activate it
-```bash
 conda activate progregressor-dev
 ```
 
