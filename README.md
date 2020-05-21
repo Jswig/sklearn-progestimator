@@ -12,11 +12,27 @@ tools for Python development (`pytest`, `tox`, `setuptools`, `pdb` ...)
 
 ## Installation
 
-WIP
+TODO: Make `pip`/`conda` installable
 
 ## Usage
 
-WIP
+This wrapper implements the standard `estimator` API. As such, it should play well with the rest of scikit-learn.
+```python
+>>> from sklearn.linear_model import LinearRegression
+    from progestimator.prog_regression import ProgressiveRegression
+    y = np.array([[1.0], [3.0], [4.0], [7.0], [15.0], [31.0]])
+    X = np.ones(([1.0], [1.0], [1.0], [1.0], [1.0], [1.0]])
+    model = ProgressiveRegression(LinearRegression()) model.fit(X,y)
+
+>>> model.predict(([1.0], [1.0], [1.0], [1.0], [1.0], [1.0]]))
+
+array([[  64.98224852],
+       [ 137.08896047],
+       [ 290.09172322],
+       [ 614.74728963],
+       [1303.63182285],
+       [2765.37143003]])
+```
 
 ## Development
 
