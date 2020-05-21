@@ -10,8 +10,9 @@ from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 
 class ProgressiveRegression(BaseEstimator, RegressorMixin):
     """Wraps an estimator to faciliate problems with time correlation in 
-    the targets.  fit(X,y) appends y with a lag of 1 to x. predict(X) for
-    each sample, the prediction on the previous sample is added as a feature
+    the targets.  This is done by having
+    - fit(X,y) append y with a lag of 1 to x. 
+    - predict(X) append to each sample the prediction on the previous sample.
    
     Parameters
     ----------
