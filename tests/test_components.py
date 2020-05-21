@@ -1,9 +1,9 @@
 import pytest
 import numpy as np
 from progestimator.prog_regression import ProgressiveRegression
+from sklearn.tree import DecisionTreeRegressor
 
 class TestShift:
-
     def test_normal(self):
         exp = np.array([np.nan, 1.0, 2.0])
         res = ProgressiveRegression._shift(
@@ -21,4 +21,4 @@ class TestShift:
         res = ProgressiveRegression._shift(
             np.array([]), 2, 1.0)
         assert np.allclose(exp, res, equal_nan = True)
-    
+ 

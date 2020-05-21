@@ -1,19 +1,31 @@
-# Anders Poirel
-
+# Author: Anders Poirel
+# 
 # Efficient implementation of shift by 
 # gzc: https://stackoverflow.com/a/42642326
 
 import numpy as np
-
-from sklearn.base import BaseEstimator, RegressorMixin, is_regressor
+from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.linear_model import LinearRegression
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 
 class ProgressiveRegression(BaseEstimator, RegressorMixin):
-    
-    def __init__(self, base_model = LinearRegression()):
-        self.model = base_model
-        self.last_target = None
+    """Wraps an estimator to faciliate problems with time correlation in 
+    the targets.  fit(X,y) appends y with a lag of 1 to x. predict(X) for
+    each sample, the prediction on the previous sample is added as a feature
+   
+    Parameters
+    ----------
+    base_estimator : estimator, default=LinearRegression()
+        The base scikit-learn compatible estimator used for prediction.
+
+    Attributes
+    ----------
+    base_estimator_ : estimator
+        The base estimator used for prediction.
+    """
+
+    def __init__(self, base_estimator = LinearRegression()):
+        self.base_estimator = base_estimator
     
     @staticmethod
     def _shift(arr, num, fill_value = np.nan):
@@ -46,36 +58,53 @@ class ProgressiveRegression(BaseEstimator, RegressorMixin):
 
         Parameters
         ----------
-        X : {ndarray, sparse matrix} of shape (n_samples, n_features)
+        X : {ndarray} of shape (n_samples, n_features)
             Training data
-        y : ndarray of shape (n_samples,) or (n_samples, n_targets)
+        y : ndarray of shape (n_samples,)
             Target values
 
         Returns
         -------
-        self : returns an instance of self.
+        self : return an instance of self.
         """
-        assert is_regressor(self.model)
+        X, y = check_X_y(X, y)
+
         y_lag1 = self._shift(y, 1)
         y_lag1[0] = y[0]
         self.last_target = y[-1]
         X_new = np.column_stack((X, y_lag1))
+        self.base_estimator.fit(X_new, y)
 
-        self.model.fit(X_new, y)
         self.is_fitted_ = True
-
         return self
     
     def predict(self, X):
+        """Predict regression value for X.
 
-        assert(self.is_fitted_)
-        X_new = np.column_stack(X, np.zeros(len(X)))
+        The predicted regression value for each point is computed using
+        the predicted value for the previous point as a feature
+
+        Parameters
+        ----------
+        X : {array-like} of shape (n_samples, n_features)
+            The training input samples. 
+
+        Returns
+        -------
+        y : ndarray of shape (n_samples,)
+            The predicted regression values.
+        """
+        check_is_fitted(self)        
+        X = check_array(X)
+        X_new = np.column_stack((X, np.zeros((len(X), 1))))
         X_new[0,-1] = self.last_target
-        y_pred = np.zeros(len(X))
+        y_pred = np.zeros((len(X),1))
         
         for i in range(len(X)-1):
-            y_pred[i] = self.model.predict(X_new[i,:])
-            X_new[i+1:-1] = y_pred[i]
-        y_pred[-1] = self.model.predict(X_new[-1,:]) 
+            # need to reshape individual passed to estimator so that they 
+            # are 2D arrays 
+            y_pred[i] = self.base_estimator.predict(X_new[i,:].reshape(1, -1))
+            X_new[i+1,-1] = y_pred[i]
+        y_pred[-1] = self.base_estimator.predict(X_new[-1,:].reshape(1,-1)) 
         
         return y_pred
