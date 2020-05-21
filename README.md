@@ -2,19 +2,24 @@
 ![Python >=3.5](https://img.shields.io/badge/Python-%3E%3D3.5-informational)
 ![MIT License](https://img.shields.io/badge/License-MIT-brightgreen)
 
-A scikit-learn estimator that wrapping base estimator to provide facilities for 
-time series problems where previous predictions are used in inference.
+A scikit-learn estimator which wraps a base estimator to provide facilities for 
+time series problems where previous predictions are used as features.
 
 ---
 
 My other goal here is to use this as a toy project for learning standard 
-tools for Python development (`pytest`, `tox`, `setuptools`, `pdb` ...)
+tools for Python development (`pytest`, `tox`, `setuptools`, `pdb`)
 
 ## Installation
 
 TODO: Make `pip`/`conda` installable
 
 ## Usage
+
+When calling `estimator.fit(X,y)`, `y` with time lag 1 is appended to `X`.
+When calling `estimator.predict(X)`, for each sample in X, the prediction
+is made using as an additional feature the previous for `y` (either true 
+or predicted).
 
 This wrapper implements the standard `estimator` API. As such, it should play well with the rest of scikit-learn.
 ```python
