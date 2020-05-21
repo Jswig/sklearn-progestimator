@@ -22,7 +22,8 @@ This wrapper implements the standard `estimator` API. As such, it should play we
     from progestimator.prog_regression import ProgressiveRegression
     y = np.array([[1.0], [3.0], [4.0], [7.0], [15.0], [31.0]])
     X = np.ones(([1.0], [1.0], [1.0], [1.0], [1.0], [1.0]])
-    model = ProgressiveRegression(LinearRegression()) model.fit(X,y)
+    model = ProgressiveRegression(LinearRegression()) 
+    model.fit(X,y)
 
 >>> model.predict(([1.0], [1.0], [1.0], [1.0], [1.0], [1.0]]))
 
