@@ -8,6 +8,6 @@ from numpy.testing import assert_array_almost_equal_nulp
 class TestPredictions():
     def test_simple(self):
         y = np.array([[1.0], [3.0], [4.0], [7.0], [15.0], [31.0]])
-        X = np.ones(([1.0], [1.0], [1.0], [1.0], [1.0], [1.0]])
+        X = np.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]])
         model = ProgressiveRegression(LinearRegression())
         model.fit(X,y)

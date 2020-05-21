@@ -3,7 +3,7 @@ channels:
   - base
   - conda-forge
 dependencies:
-  -python>3.5
-  -pytest
-  -scikit-learn
-  
+  - python=3.7
+  - pytest
+  - scikit-learn
+  - setuptools
