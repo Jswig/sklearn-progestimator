@@ -68,7 +68,7 @@ class ProgressiveRegression(BaseEstimator, RegressorMixin):
         -------
         self : return an instance of self.
         """
-        X, y = check_X_y(X, y)
+        X, y = check_X_y(X, y, ensure_min_features = 0)
 
         y_lag1 = self._shift(y, 1)
         y_lag1[0] = y[0]
@@ -96,7 +96,7 @@ class ProgressiveRegression(BaseEstimator, RegressorMixin):
             The predicted regression values.
         """
         check_is_fitted(self)        
-        X = check_array(X)
+        X = check_array(X, ensure_min_features = 0)
         X_new = np.column_stack((X, np.zeros((len(X), 1))))
         X_new[0,-1] = self.last_target
         y_pred = np.zeros((len(X),1))
