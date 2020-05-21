@@ -9,7 +9,7 @@ from sklearn.base import BaseEstimator, RegressorMixin, is_regressor
 from sklearn.linear_model import LinearRegression
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 
-class ProgressiveRegressor(BaseEstimator, RegressorMixin):
+class ProgressiveRegression(BaseEstimator, RegressorMixin):
     
     def __init__(self, base_model = LinearRegression()):
         self.model = base_model
