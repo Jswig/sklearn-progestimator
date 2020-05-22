@@ -5,8 +5,10 @@ with open('pypi_long_description.md', encoding='utf-8') as f:
 
 setuptools.setup(
     name = "scikit-learn-progestimator",
-    version = "0.1.1",
+    version = "0.1.3.2",
     description = "scikit-learn estimator wrapper for time series problems",
+    long_description = long_description,
+    long_description_content_type = "text/markdown",
     author = "Anders Poirel",
     author_email = "andersjopo@gmail.com",
     packages = setuptools.find_packages(),
@@ -18,7 +20,6 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",  
-        "Operating System :: MacOS",
         "Operating System :: POSIX :: Linux", 
         "Operating System :: Microsoft :: Windows :: Windows 10",
         "Programming Language :: Python :: 3",

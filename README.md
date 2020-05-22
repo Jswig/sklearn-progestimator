@@ -12,14 +12,21 @@ tools for Python development (`pytest`, `tox`, `setuptools`, `pdb`)
 
 ## Installation
 
-TODO: Make `pip`/`conda` installable
+Using `pip`:
+```bash
+pip install scikit-learn-progestimator
+```
+
+Using `conda`:
+```
+WIP
+```
 
 ## Usage
 
-When calling `estimator.fit(X,y)`, `y` with time lag 1 is appended to `X`.
-When calling `estimator.predict(X)`, for each sample in X, the prediction
-is made using as an additional feature the previous for `y` (either true 
-or predicted).
+When calling `estimator.fit(X,y)`, `y` with time lag 1 is appended to `X`
+before fitting the model.
+When calling `estimator.predict(X)`, for each sample in `X`, the prediction uses the previous known value for `y` (either true or predicted) as an additional feature.
 
 This wrapper implements the standard `estimator` API. As such, it should play well with the rest of scikit-learn.
 ```python

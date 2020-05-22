@@ -1,24 +1,18 @@
-
-
-
-
 A scikit-learn estimator which wraps another estimator to provide facilities for time series problems where previous predictions are used
 as features.
 
-
 ## Description
 
-When calling `estimator.fit(X,y)`, `y` with time lag 1 is appended to `X`.
-When calling `estimator.predict(X)`, for each sample in X, the prediction
-is made using as an additional feature the previous for `y` (either true 
-or predicted).
+When calling `model.fit(X,y)`, `y` with time lag 1 is appended to `X`
+before fitting the model.
+When calling `model.predict(X)`, for each sample in `X`, the prediction uses the previous known value for `y` (either true or predicted) as an additional feature.
 
 ## Usage
 
 This estimator implements the standard `estimator` API. As
-scuh, it should play nice with other scikit-learn objects
+such, it should play nice with other scikit-learn objects
 
-Wrapping an estimator
+Example of wrapping an existing estimator:
 ```python
 >>> from sklearn.linear_model import LinearRegression
     from progestimator.prog_regression import ProgressiveRegression
@@ -37,4 +31,3 @@ array([[  64.98224852],
        [1303.63182285],
        [2765.37143003]])
 ```
-
