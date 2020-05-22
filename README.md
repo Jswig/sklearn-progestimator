@@ -1,6 +1,9 @@
 # sklearn-progestimator
-![Python >=3.5](https://img.shields.io/badge/Python-%3E%3D3.5-informational)
-![MIT License](https://img.shields.io/badge/License-MIT-brightgreen)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/scikit-learn-progestimator)](https://pypi.python.org/pypi/scikit-learn-progestimator/)
+[![PyPI version fury.io](https://badge.fury.io/py/scikit-learn-progestimator.svg)](https://pypi.python.org/pypi/scikit-learn-progestimator/)
+[![PyPI license](https://img.shields.io/pypi/l/scikit-learn-progestimator)](https://pypi.python.org/pypi/scikit-learn-progestimator/)
+
+
 
 A scikit-learn estimator which wraps a base estimator to provide facilities for 
 time series problems where previous predictions are used as features.
