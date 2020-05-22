@@ -5,7 +5,7 @@ with open('pypi_long_description.md', encoding='utf-8') as f:
 
 setuptools.setup(
     name = "scikit-learn-progestimator",
-    version = "0.1.3.2",
+    version = "0.1.0",
     description = "scikit-learn estimator wrapper for time series problems",
     long_description = long_description,
     long_description_content_type = "text/markdown",
