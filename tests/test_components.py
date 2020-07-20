@@ -1,7 +1,6 @@
 import pytest
 import numpy as np
 from progestimator.prog_regression import ProgressiveRegression
-from sklearn.tree import DecisionTreeRegressor
 
 class TestShift:
     def test_normal(self):
