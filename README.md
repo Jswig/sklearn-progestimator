@@ -59,7 +59,7 @@ Create the development environment and activate it
 conda env create -f environment.yml
 conda activate progregressor-dev
 ```
-Alternatively, the environment can be replciated with `pip` and
+Alternatively, the environment can be replicated with `pip` and
 `requirements.txt`
 
 ### Tests
